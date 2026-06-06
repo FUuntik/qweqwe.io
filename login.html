@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycoris Server - Вход</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #3C3838; 
+            color: #DB2222;            
+            font-family: 'Londrina Solid', sans-serif; 
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            box-sizing: border-box;
+            
+            display: flex;
+            flex-direction: column;    
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://cdn.discordapp.com/attachments/1494331191766024303/1511119351162601575/tumblr_dd13ba214a85cab0ce8c4d7fa7d3c180_d1349754_2048.gif?ex=6a1f4b10&is=6a1df990&hm=5897e704263002536c512ef7b6e32fd6c3e2d906553b70b91f8230b8ff3492da&");
+            background-size: cover;       
+            background-position: center;  
+            filter: blur(3px);            
+            z-index: -1;                  
+            opacity: 0.4;                 
+        }
+
+        .home-link {
+            font-size: 4rem;            
+            font-weight: 900;
+            color: #DB2222;
+            text-decoration: none;      
+            margin-bottom: 20px;        
+            letter-spacing: 2px;
+            transition: all 0.3s ease;  
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .home-link:hover {
+            color: #ffffff;             
+            text-shadow: 0 0 20px #DB2222, 0 0 30px #DB2222; 
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;          
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #DB2222; 
+            box-shadow: 0 0 25px rgba(219, 34, 34, 0.25); 
+            box-sizing: border-box;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 35px;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;    
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            font-size: 1.4rem;
+            margin-bottom: 8px;       
+            letter-spacing: 1px;
+        }
+
+        .form-group input {
+            background-color: rgba(60, 56, 56, 0.7); 
+            border: 2px solid #DB2222;
+            border-radius: 10px;
+            padding: 14px 15px;
+            color: #fff;               
+            font-family: inherit;      
+            font-size: 1.2rem;
+            outline: none;             
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus {
+            box-shadow: 0 0 12px #DB2222;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #DB2222;
+            color: black;
+            border: none;
+            padding: 16px;
+            font-family: 'Londrina Solid', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 20px white;
+        }
+
+        .register-hint {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: #fff;               
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .register-hint a {
+            color: #DB2222;            
+            text-decoration: none;     
+            font-weight: 900;
+            transition: all 0.2s ease;
+            margin-left: 5px;
+        }
+
+        .register-hint a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #DB2222, 0 0 20px #DB2222; 
+        }
+    </style>
+</head>
+<body>
+
+    <a href="My_syte.html" class="home-link">Lycoris</a>
+
+    <div class="login-container">
+        <h2>АВТОРИЗАЦИЯ</h2>
+        <form>
+            <div class="form-group">
+                <label>НИК MINECRAFT ИЛИ EMAIL</label>
+                <input type="text" placeholder="Введите ник Minecraft..." required>
+            </div>
+            
+            <div class="form-group">
+                <label>ПАРОЛЬ</label>
+                <input type="password" placeholder="Введите ваш пароль..." required>
+            </div>
+
+            <button type="submit" class="submit-btn">ВОЙТИ В АККАУНТ</button>
+        </form>
+
+        <div class="register-hint">
+            ЕСЛИ НЕТ АККАУНТА, <a href="register.html">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+        </div>
+    </div>
+
+</body>
+</html>

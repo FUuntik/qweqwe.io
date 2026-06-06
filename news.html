@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycoris Server - Новости</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #3C3838; 
+            color: #DB2222;            
+            font-family: 'Londrina Solid', sans-serif; 
+            padding: 20px;
+            padding-top: 130px; /* Скорректировано под стандартный размер шапки */      
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://cdn.discordapp.com/attachments/1494331191766024303/1511119351162601575/tumblr_dd13ba214a85cab0ce8c4d7fa7d3c180_d1349754_2048.gif?ex=6a1f4b10&is=6a1df990&hm=5897e704263002536c512ef7b6e32fd6c3e2d906553b70b91f8230b8ff3492da&");
+            background-size: cover;       
+            background-position: center;  
+            filter: blur(3px);            
+            z-index: -1;                  
+            opacity: 0.4;                 
+        }
+
+        /* ИСПРАВЛЕНО: Размеры плашки теперь в точности как на Правилах */
+        .navbar {
+            position: fixed;              
+            top: 20px;                    
+            left: 50%;
+            transform: translateX(-50%); 
+            width: 70%;                  
+            max-width: 1000px;            
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(5px);   
+            border-radius: 15px;         
+            padding: 12px 35px;          
+            display: flex;                
+            justify-content: space-between; 
+            align-items: center;         
+            box-sizing: border-box;
+            border: 1px solid rgba(212, 49, 49, 0.2); 
+            z-index: 100;                
+        }
+
+        /* ИСПРАВЛЕНО: Уменьшен размер логотипа под стиль остальных страниц */
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #DB2222;            
+            text-decoration: none;     
+            transition: all 0.2s ease; 
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 10px #DB2222;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px; 
+        }
+
+        /* ИСПРАВЛЕНО: Размеры шрифтов и отступы ссылок теперь аккуратные */
+        .nav-links a, .dropbtn {
+            color: #D43131;
+            text-decoration: none;       
+            font-size: 1.4rem;
+            transition: all 0.2s ease;   
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .dropdown:hover .dropbtn {
+            background-color: #D43131;   
+            color: black;                
+        }
+
+        /* ДОБАВЛЕНО: Функционал и стили выпадающего списка */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: transparent;
+            display: none;
+            z-index: 101;
+        }
+
+        .dropdown:hover::after {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.95); 
+            backdrop-filter: blur(5px);
+            min-width: 220px; 
+            box-shadow: 0 0 15px rgba(219, 34, 34, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(219, 34, 34, 0.5);
+            z-index: 102; 
+            top: calc(100% + 8px);     
+            left: 50%;                 
+            transform: translateX(-50%);
+            padding: 0;                 
+            overflow: hidden;           
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #D43131;
+            padding: 14px 15px;        
+            text-decoration: none;
+            display: block;
+            text-align: center;        
+            font-size: 1.2rem;
+            border-radius: 0; 
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #D43131;
+            color: black;
+        }
+
+        /* ИСПРАВЛЕНО: Размер кнопки входа приведен к единому стандарту */
+        .login-btn {
+            position: fixed;
+            top: 20px;                  
+            right: 40px;                
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(5px);
+            border: 2px solid #DB2222;  
+            color: #DB2222;
+            padding: 10px 24px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 12px;        
+            transition: all 0.2s ease;
+            z-index: 101;               
+        }
+
+        .login-btn:hover {
+            background-color: #DB2222;
+            color: black;
+            box-shadow: 0 0 15px #DB2222; 
+        }
+
+        /* СТИЛИ ДЛЯ БЛОКА НОВОСТЕЙ */
+        .news-container {
+            max-width: 850px;           
+            margin: 0 auto;             
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(219, 34, 34, 0.6);
+        }
+
+        .news-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            border: 2px solid #DB2222;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 25px rgba(219, 34, 34, 0.25);
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(219, 34, 34, 0.45);
+        }
+
+        .news-date {
+            color: #fff;
+            font-size: 1.1rem;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .news-card h2 {
+            margin: 0 0 15px 0;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .news-card p {
+            color: #fff;                
+            font-size: 1.15rem;
+            line-height: 1.5;           
+            margin: 0;
+            font-family: sans-serif;    
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ */
+        @media (max-width: 768px) {
+            .news-card {
+                padding: 25px;
+            }
+            body {
+                padding-top: 110px;
+            }
+            .page-title {
+                font-size: 2.2rem;
+            }
+            .news-card h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ДОБАВЛЕНО: Мобильная адаптация меню (как на Правилах) */
+        @media (max-width: 500px) {
+            body {
+                padding: 15px;
+                padding-top: 110px;
+            }
+            .nav-links {
+                gap: 5px; 
+            }
+            .nav-links a, .dropbtn {
+                font-size: 1.1rem; 
+                padding: 4px 8px;
+            }
+            .dropdown-content {
+                min-width: 160px; 
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ИСПРАВЛЕНО: Навбар теперь аккуратный и с выпадающим меню -->
+    <nav class="navbar">
+        <a href="My_syte.html" class="logo">Lycoris</a>
+        
+        <div class="nav-links">
+            <div class="dropdown">
+                <a href="My_syte.html" class="dropbtn">Главная</a>
+                <div class="dropdown-content">
+                    <a href="https://www.donationalerts.com/r/go_invo" target="_blank" rel="noopener noreferrer">Снять бан</a>
+                    <a href="https://www.donationalerts.com/r/go_invo" target="_blank" rel="noopener noreferrer">Поддержать автора</a>
+                </div>
+            </div>
+            
+            <a href="rules.html">Правила</a>
+            <a href="news.html">Новости</a>
+            <a href="support.html">Поддержка</a>
+        </div>
+    </nav>
+
+    <a href="login.html" class="login-btn">Войти</a>
+
+    <div class="news-container">
+        <h1 class="page-title">НОВОСТИ СЕРВЕРА</h1>
+
+        <div class="news-card">
+            <div class="news-date">1 ИЮНЯ 2026</div>
+            <h2>ГРАНДИОЗНЫЙ ВАЙП И ОБНОВЛЕНИЕ 1.21!</h2>
+            <p>Друзья, свершилось! Мы полностью обновили карту и перешли на самую свежую версию Майнкрафта. Вас ждут новые данжи, улучшенная генерация пещер и, конечно же, стабильный ТПС без лагов. Залетайте на спавн, места хватит всем!</p>
+        </div>
+
+        <div class="news-card">
+            <div class="news-date">25 МАЯ 2026</div>
+            <h2>ИТОГИ СТРОИТЕЛЬНОГО КОНКУРСА</h2>
+            <p>Завершился наш ежемесячный конкурс на лучшую средневековую базу. Победителем стал игрок с ником <b>Steve_Pro</b>, построивший невероятный готический замок с водяной мельницей. Приз в виде уникального префикса и алмазов уже выдан!</p>
+        </div>
+
+        <div class="news-card">
+            <div class="news-date">15 МАЯ 2026</div>
+            <h2>ОБНОВЛЕНИЕ ПРАВИЛ СЕРВЕРА</h2>
+            <p>Мы немного скорректировали правила в отношении гриферства незаприваченных территорий рядом со спавном. Пожалуйста, ознакомьтесь с обновленным разделом, чтобы избежать случайных банов от нашей администрации.</p>
+        </div>
+    </div>
+
+</body>
+</html>
